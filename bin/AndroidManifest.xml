@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.uapush.android.sample_high"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk android:minSdkVersion="7" android:targetSdkVersion="7" />
+
+    <!-- Required -->
+    <permission
+        android:name="com.uapush.android.sample_high.permission.SEND"
+        android:protectionLevel="signature" />
+    <permission
+        android:name="com.uapush.android.sample_high.permission.UAPUSH_MESSAGE"
+        android:protectionLevel="signature" />
+    <permission
+        android:name="com.uapush.android.service.UAPUSH_PROVIDER"
+        android:protectionLevel="normal" />
+    
+    <!-- Required -->
+    <uses-permission android:name="com.uapush.android.sample_high.permission.SEND" />
+    <uses-permission android:name="com.uapush.android.sample_high.permission.UAPUSH_MESSAGE" />
+    <uses-permission android:name="com.uapush.android.service.UAPUSH_PROVIDER" />
+    
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    
+    <uses-permission android:name="com.android.browser.permission.READ_HISTORY_BOOKMARKS" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
+    <!-- Optional -->
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.SEND_SMS"/>
+    
+    
+    <!-- Required for location -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_UPDATES" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    
+    
+    <application
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:name=".SampleHighApplication">
+        
+        
+        <!-- For test only -->
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+        <!-- For test only -->
+        <activity android:name=".TestActivity" >
+            <intent-filter>
+                <action android:name="uapush.testAction" />
+                <category android:name="uapush.testCategory" />
+            </intent-filter>
+        </activity>
+        
+
+        <!-- Required -->
+        <activity
+            android:name="com.uapush.android.ui.UAActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+            <intent-filter>
+                <action android:name="com.uapush.android.ui.UAActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <!-- NOTE: replace "com.uapush.android.sample_high" to your app's packagen name -->
+                <category android:name="com.uapush.android.sample_high" />
+            </intent-filter>
+        </activity>
+    
+        <!-- Required -->
+        <service
+            android:name="com.uapush.android.service.DownloadService"
+            android:enabled="true"
+            android:exported="false" >
+        </service>
+        
+        <!-- Required -->
+        <service
+            android:name="com.uapush.android.service.UAService"
+            android:enabled="true"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.uapush.android.intent.REGISTER" />
+                <action android:name="com.uapush.android.intent.UNREGISTER" />
+                <action android:name="com.uapush.android.intent.REPORT" />
+                <action android:name="com.uapush.android.intent.UAService" />
+            </intent-filter>
+        </service>
+        
+        <!-- Required -->
+        <receiver
+            android:name="com.uapush.android.service.UAReceiver"
+            android:enabled="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.USER_PRESENT" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
+        
+        <!-- Required -->
+        <receiver android:name="com.uapush.android.service.AlarmReceiver" />
+        
+        <!-- Required -->
+        <provider android:name="com.uapush.android.data.UAProvider"
+            android:authorities="com.uapush.android.sample_high.data"
+            android:permission="com.uapush.android.service.UAPUSH_PROVIDER"
+            android:enabled="true"
+            android:exported="true"
+        />
+        
+        
+        <!-- User defined.  For test only -->
+        <receiver
+            android:name=".MyReceiver"
+            android:enabled="true"><!-- android:enabled="true" 接受INSTALL ALONE SDK的广播信息 -->
+            <intent-filter>
+                <action android:name="com.uapush.android.intent.REGISTRATION" />
+                <action android:name="com.uapush.android.intent.MESSAGE_RECEIVED" />
+                <action android:name="com.uapush.android.intent.NOTIFICATION_RECEIVED" />
+                <action android:name="com.uapush.android.intent.NOTIFICATION_OPENED" />
+                <!-- NOTE: replace the package name "com.uapush.android" to your app package name -->
+                <category android:name="com.uapush.android.sample_high" />
+            </intent-filter>
+        </receiver>
+        
+        <!-- Optional. Enable it you can get statistics data with channel -->
+        <meta-data android:name="UACH" android:value="developer-default"/>
+        <meta-data android:name="UA_APPKEY" android:value="sample_high@uapush.com" />
+        
+    </application>
+
+</manifest>

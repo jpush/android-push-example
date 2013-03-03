@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/hello" />
+    
+    <Button 
+        android:id="@+id/register"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Regsiter" />
+    
+    <Button 
+        android:id="@+id/unregister"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Unregister" />
+    
+    <Button 
+        android:id="@+id/alias_tags"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Set Alias and Tags" />
+    
+    <Button android:id="@+id/default1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Default builder (id:0)"
+        />
+    
+    <Button android:id="@+id/basic1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Basic Builder 1 (id:1)"
+        />
+    <Button android:id="@+id/basic2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Basic Builder 2 (id:2)"
+        />
+        
+    <Button android:id="@+id/custom1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Custom Builder 1 (id:3)"
+        />
+        
+    <Button android:id="@+id/custom2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Custom Builder 2 (id:4)"
+        />
+                
+    
+    
+</LinearLayout>
