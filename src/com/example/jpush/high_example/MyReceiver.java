@@ -1,4 +1,4 @@
-package cn.jpush.android.sample_high;
+package com.example.jpush.high_example;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

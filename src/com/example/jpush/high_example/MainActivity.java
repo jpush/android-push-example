@@ -1,4 +1,4 @@
-package cn.jpush.android.sample_high;
+package com.example.jpush.high_example;
 
 import java.util.HashSet;
 import java.util.Set;
